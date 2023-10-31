@@ -1,15 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SidebarWrapper from "../sidebarWrapper";
 import "./sidebar.scss";
-import { Period } from "./sidebarData";
+import { Period, TransactionTypes } from "./sidebarData";
 import Icon from "../../../../assets/Icon/icon";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import { Calendar } from "react-modern-calendar-datepicker";
-import useClickOutside from "../../../../hooks/useClickOutside";
+import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Calendar } from "@hassanmojab/react-modern-calendar-datepicker";
 
-const CalendarSelector = ({ selectedDay, setSelectedDay, ref }) => {
+const TransactionType = () => {
   return (
-    <div className="calendar" ref={ref}>
+    <div className="transactionType">
+      {TransactionTypes.map((data) => (
+        <div className="transactionType__item">
+          <input
+            type="checkbox"
+            id={data.type}
+            name={data.type}
+            value={data.type}
+          />
+          <label for={data.type}> {data.type}</label>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const CalendarSelector = ({ selectedDay, setSelectedDay }) => {
+  return (
+    <div className="calendar">
       <Calendar
         value={selectedDay}
         onChange={setSelectedDay}
@@ -21,9 +38,12 @@ const CalendarSelector = ({ selectedDay, setSelectedDay, ref }) => {
   );
 };
 
-const FilterInput = ({ handleToggle = () => {} }) => {
+const FilterInput = ({ handleToggle = () => {}, full = false }) => {
   return (
-    <div className="filterInput" onClick={() => handleToggle()}>
+    <div
+      className={!full ? "filterInput" : "filterInput__full"}
+      onClick={() => handleToggle()}
+    >
       <p>17 Jul 2023</p>
       <Icon name="dropdown" />
     </div>
@@ -50,13 +70,14 @@ const Sidebar = ({ handleSidebarClose }) => {
 
   const [selectedDay, setSelectedDay] = useState(defaultValue);
   const [calendar, setCalendar] = useState(false);
-
-  const node = useClickOutside(() => {
-    setCalendar(false);
-  });
+  const [transactionType, setTransactionType] = useState(false);
 
   const handleCalendarToggle = () => {
-    setCalendar((prevState) => !prevState); // Corrected the toggle logic
+    setCalendar((prevState) => !prevState);
+  };
+
+  const handleTransactionToggle = () => {
+    setTransactionType((prevState) => !prevState);
   };
 
   return (
@@ -72,20 +93,24 @@ const Sidebar = ({ handleSidebarClose }) => {
           <h2>Date Range</h2>
           <div className="sidebar__date-picker">
             <FilterInput handleToggle={handleCalendarToggle} />
-            {/* <FilterInput handleToggle={handleCalendarToggle} /> */}
+            <FilterInput handleToggle={handleCalendarToggle} />
           </div>
           {calendar ? (
-            <CalendarSelector
-              selectedDay={selectedDay}
-              setSelectedDay={setSelectedDay}
-              ref={node}
-            />
+            <div>
+              <CalendarSelector
+                selectedDay={selectedDay}
+                setSelectedDay={setSelectedDay}
+              />
+            </div>
           ) : null}
         </div>
 
-        <div className="sidebar__date">
+        <div className="sidebar__transaction">
           <h2>Transaction Type</h2>
-          <div className="sidebar__date-picker">{/* <FilterInput /> */}</div>
+          <div className="sidebar__transaction-picker">
+            <FilterInput full handleToggle={handleTransactionToggle} />
+          </div>
+          {transactionType ? <TransactionType /> : null}
         </div>
       </div>
     </SidebarWrapper>

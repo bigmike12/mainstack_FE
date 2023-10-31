@@ -21,3 +21,24 @@ export const Period = [
     name: "All time",
   },
 ];
+
+export const TransactionTypes = [
+  {
+    type: "Store Transactions",
+  },
+  {
+    type: "Get Tipped ",
+  },
+  {
+    type: "Withdrawals",
+  },
+  {
+    type: "Chargebacks",
+  },
+  {
+    type: "Cashbacks",
+  },
+  {
+    type: "Refer & Earn",
+  },
+];

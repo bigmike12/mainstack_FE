@@ -10,7 +10,7 @@ import Sidebar from "../../components/ui/sidebar/sidebar/sidebar";
 
 const Landingpage = () => {
   const ref = useRef(null);
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(true);
 
   const handleSidebar = () => {
     setSidebar(true);
