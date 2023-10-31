@@ -1,0 +1,22 @@
+.switch {
+  display: flex;
+  padding: 4px 12px 4px 5px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 100px;
+  background: var(--gray-gray-50, #eff1f6);
+
+  &__name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 100000px;
+    background: linear-gradient(139deg, #5c6670 2.33%, #131316 96.28%);
+
+    p {
+        color: white;
+    }
+  }
+}

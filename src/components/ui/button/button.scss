@@ -1,0 +1,29 @@
+.button {
+  display: flex;
+  padding: 12px 30px;
+  background-color: var(--grayVarTwo);
+  border-radius: 100px;
+  gap: 4px;
+
+  h4 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &-count {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    padding: 4px 6.5px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blackVarOne);
+    border-radius: 100px;
+
+    p {
+      font-size: 12px;
+      color: white;
+      font-weight: 500;
+    }
+  }
+}

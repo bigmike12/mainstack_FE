@@ -1,0 +1,21 @@
+.menu {
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
+  background-color: transparent;
+  border-radius: 100px;
+  color: var(--grayVarOne);
+
+  &__active {
+    display: flex;
+    align-items: center;
+    padding: 8px 18px;
+    background-color: black;
+    border-radius: 100px;
+    color: white;
+  }
+
+  &__title {
+    margin-left: 4.97px;
+  }
+}

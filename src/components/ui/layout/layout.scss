@@ -1,0 +1,13 @@
+.layout {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: white;
+
+  &__content {
+    width: 1440px;
+    height: auto;
+  }
+}

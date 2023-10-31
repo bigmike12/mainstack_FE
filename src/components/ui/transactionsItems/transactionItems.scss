@@ -1,0 +1,48 @@
+.transactionItems {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__left {
+    display: flex;
+    align-items: center;
+
+    &-info {
+      margin-left: 14.5px;
+
+      h2 {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        color: var(--blackVarOne);
+        margin-bottom: 9px;
+      }
+
+      h4 {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        color: var(--grayVarOne);
+      }
+    }
+  }
+
+  &__right {
+    text-align: right;
+    
+    h2 {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      color: var(--blackVarOne);
+      margin-bottom: 4px;
+    }
+
+    h4 {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      color: var(--grayVarOne);
+    }
+  }
+}

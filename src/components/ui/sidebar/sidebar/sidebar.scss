@@ -1,0 +1,91 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+
+  h2 {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  &__period {
+    display: flex;
+    overflow-y: scroll;
+    gap: 12px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__date {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-picker {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.handleSideBarButton {
+  box-sizing: border-box;
+  padding: 10px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--grayVarTwo);
+  white-space: nowrap; /* Prevent text from wrapping */
+  text-overflow: ellipsis;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--grayVarTwo);
+  }
+
+  p:hover {
+    cursor: pointer;
+    background-color: var(--grayVarTwo);
+  }
+
+  &-active {
+    box-sizing: border-box;
+    padding: 10px 18px;
+    border-radius: 100px;
+    border: 1px solid var(--grayVarTwo);
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+    background-color: black;
+    color: white;
+  }
+}
+
+.filterInput {
+  width: 49%;
+  height: auto;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 12px;
+  border: 1px solid var(--grayVarTwo);
+  background-color: var(--grayVarTwo);
+}
+
+.calendar {
+  position: absolute;
+  top: 157px;
+  width: 100%;
+}
+
+.custom-calendar {
+  width: 100% !important;
+  height: 353px !important;
+}
+
+.custom-selected {
+  width: 32.016px !important;
+  height: 32.016px !important;
+}
