@@ -1,5 +1,6 @@
 .landingpage {
   display: flex;
+  padding-top: 64px;
 
   .bar {
     position: absolute;
@@ -24,6 +25,27 @@
 
 .sidebarOverlay {
   display: flex;
+  padding-top: 64px;
+
+  .bar {
+    position: absolute;
+    top: 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0 140px;
+    margin-top: 65px;
+    width: 100%;
+
+    &-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 82px;
+    }
+  }
 
   &::after {
     content: "";
@@ -33,7 +55,11 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(86,97,107, 0.9); /* Change the color and opacity as needed */
+    background-color: rgba(
+      86,
+      97,
+      107,
+      0.9
+    ); /* Change the color and opacity as needed */
   }
 }
-

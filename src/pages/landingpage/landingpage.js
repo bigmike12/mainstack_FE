@@ -25,10 +25,8 @@ const Landingpage = () => {
   return (
     <div>
       <Navbar />
-      <div
-        className={sidebar ? "sidebarOverlay" : "landingpage"}
-        // onClick={handleClickOutside}
-      >
+
+      <div className={sidebar ? "sidebarOverlay" : "landingpage"}>
         <div className="bar">
           <Appbar />
         </div>

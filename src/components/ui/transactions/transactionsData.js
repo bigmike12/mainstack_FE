@@ -39,4 +39,60 @@ export const TransactionsData = [
     date: "Apr 03,2022",
     type: "deposit"
   },
+  {
+    product_name: "Psychology of Money",
+    name: "Roy Cash",
+    amount: "USD 600",
+    date: "Apr 03,2022",
+    type: "deposit"
+  },
+  {
+    product_name: "Psychology of Money",
+    name: "Roy Cash",
+    amount: "USD 600",
+    date: "Apr 03,2022",
+    type: "deposit"
+  },
+  {
+    product_name: "Psychology of Money",
+    name: "Roy Cash",
+    amount: "USD 600",
+    date: "Apr 03,2022",
+    type: "withdrawal"
+  },
+  {
+    product_name: "Psychology of Money",
+    name: "Roy Cash",
+    amount: "USD 600",
+    date: "Apr 03,2022",
+    type: "deposit"
+  },
+  {
+    product_name: "Psychology of Money",
+    name: "Roy Cash",
+    amount: "USD 600",
+    date: "Apr 03,2022",
+    type: "deposit"
+  },
+  {
+    product_name: "Psychology of Money",
+    name: "Roy Cash",
+    amount: "USD 600",
+    date: "Apr 03,2022",
+    type: "deposit"
+  },
+  {
+    product_name: "Psychology of Money",
+    name: "Roy Cash",
+    amount: "USD 600",
+    date: "Apr 03,2022",
+    type: "withdrawal"
+  },
+  {
+    product_name: "Psychology of Money",
+    name: "Roy Cash",
+    amount: "USD 600",
+    date: "Apr 03,2022",
+    type: "deposit"
+  },
 ];

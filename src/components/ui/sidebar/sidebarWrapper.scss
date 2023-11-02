@@ -27,4 +27,33 @@
       margin-bottom: 20px;
     }
   }
+
+  &__button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 350px;
+
+    &-default {
+      width: 198px;
+      display: flex;
+      padding: 12px 24px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100px;
+      border: 1px solid var(--grayVarTwo);
+      background: white;
+    }
+
+    &-black {
+      width: 198px;
+      display: flex;
+      padding: 12px 24px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100px;
+      border: 1px solid var(--grayVarTwo);
+      background: black;
+      color: white;
+    }
+  }
 }

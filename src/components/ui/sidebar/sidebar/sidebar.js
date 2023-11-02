@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import SidebarWrapper from "../sidebarWrapper";
 import "./sidebar.scss";
-import { Period, TransactionTypes } from "./sidebarData";
+import { Period, TransactionStatusData, TransactionTypes } from "./sidebarData";
 import Icon from "../../../../assets/Icon/icon";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 import { Calendar } from "@hassanmojab/react-modern-calendar-datepicker";
+import { formatDate, truncateMultilineText } from "../../../../helpers/utils";
 
-const TransactionType = () => {
+const TransactionType = ({ handleChange }) => {
   return (
     <div className="transactionType">
       {TransactionTypes.map((data) => (
@@ -16,6 +17,26 @@ const TransactionType = () => {
             id={data.type}
             name={data.type}
             value={data.type}
+            onChange={handleChange}
+          />
+          <label for={data.type}> {data.type}</label>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const TransactionStatus = ({ handleChange }) => {
+  return (
+    <div className="transactionStatus">
+      {TransactionStatusData.map((data) => (
+        <div className="transactionStatus__item">
+          <input
+            type="checkbox"
+            id={data.type}
+            name={data.type}
+            value={data.type}
+            onChange={handleChange}
           />
           <label for={data.type}> {data.type}</label>
         </div>
@@ -38,14 +59,54 @@ const CalendarSelector = ({ selectedDay, setSelectedDay }) => {
   );
 };
 
-const FilterInput = ({ handleToggle = () => {}, full = false }) => {
+const CalendarSelectorTwo = ({ selectedDay, setSelectedDay }) => {
+  return (
+    <div className="calendar">
+      <Calendar
+        value={selectedDay}
+        onChange={setSelectedDay}
+        colorPrimary="#131316"
+        calendarClassName="custom-calendar"
+        calendarSelectedDayClassName="custom-selected"
+      />
+    </div>
+  );
+};
+
+const FilterDate = ({
+  handleToggle = () => {},
+  full = false,
+  input,
+  open = false,
+}) => {
+  const { year, month, day } = input;
+  const date = `${day},${month},${year}`;
+  const formatedDate = formatDate(date);
+
   return (
     <div
-      className={!full ? "filterInput" : "filterInput__full"}
+      className={!open ? "filterInput" : "filterInput__open"}
       onClick={() => handleToggle()}
     >
-      <p>17 Jul 2023</p>
-      <Icon name="dropdown" />
+      <p>{formatedDate}</p>
+      <div>{!open ? <Icon name="dropdown" /> : <Icon name="open" />}</div>
+    </div>
+  );
+};
+
+const FilterInput = ({ handleToggle = () => {}, input, open = false }) => {
+  const selectedInput = input.join(", ");
+  console.log(selectedInput);
+
+  return (
+    <div
+      className={!open ? "filterInputfull" : "filterInputfull__open"}
+      onClick={() => handleToggle()}
+    >
+      <p>{truncateMultilineText(selectedInput, 52)}</p>
+      <div className="filterInput__full-icon">
+        {!open ? <Icon name="dropdown" /> : <Icon name="open" />}
+      </div>
     </div>
   );
 };
@@ -64,24 +125,76 @@ const HandleSideBarButton = ({ date }) => {
 const Sidebar = ({ handleSidebarClose }) => {
   const defaultValue = {
     year: 2023,
-    month: 10,
-    day: 14,
+    month: 7,
+    day: 17,
+  };
+  const defaultValueTwo = {
+    year: 2023,
+    month: 8,
+    day: 17,
   };
 
   const [selectedDay, setSelectedDay] = useState(defaultValue);
+  const [selectedDayTwo, setSelectedDaytwo] = useState(defaultValueTwo);
   const [calendar, setCalendar] = useState(false);
+  const [calendarTwo, setCalendarTwo] = useState(false);
   const [transactionType, setTransactionType] = useState(false);
+  const [transactionStatus, setTransactionStatus] = useState(false);
+  const [allcheckedTypes, setAllCheckedTypes] = useState([]);
+  const [allcheckedStatus, setAllCheckedStatus] = useState([]);
+
+  function handleChange(e) {
+    if (e.target.checked) {
+      setAllCheckedTypes([...allcheckedTypes, e.target.value]);
+    } else {
+      setAllCheckedTypes(
+        allcheckedTypes.filter((item) => item !== e.target.value)
+      );
+    }
+  }
+
+  function handleChangeStatus(e) {
+    if (e.target.checked) {
+      setAllCheckedStatus([...allcheckedStatus, e.target.value]);
+    } else {
+      setAllCheckedStatus(
+        allcheckedStatus.filter((item) => item !== e.target.value)
+      );
+    }
+  }
 
   const handleCalendarToggle = () => {
     setCalendar((prevState) => !prevState);
+  };
+
+  const handleCalendarToggleTwo = () => {
+    setCalendarTwo((prevState) => !prevState);
   };
 
   const handleTransactionToggle = () => {
     setTransactionType((prevState) => !prevState);
   };
 
+  const handleTransactionStatusToggle = () => {
+    setTransactionStatus((prevState) => !prevState);
+  };
+
+  const handleReset = () => {
+    setSelectedDay(defaultValue);
+    setSelectedDaytwo(defaultValueTwo);
+    setCalendar(false);
+    setCalendarTwo(false);
+    setTransactionType(false);
+    setTransactionStatus(false);
+    setAllCheckedTypes([]);
+    setAllCheckedStatus([]);
+  };
+
   return (
-    <SidebarWrapper handleSidebarClose={handleSidebarClose}>
+    <SidebarWrapper
+      handleSidebarClose={handleSidebarClose}
+      handleReset={handleReset}
+    >
       <div className="sidebar">
         <div className="sidebar__period">
           {Period.map((data, index) => (
@@ -92,25 +205,61 @@ const Sidebar = ({ handleSidebarClose }) => {
         <div className="sidebar__date">
           <h2>Date Range</h2>
           <div className="sidebar__date-picker">
-            <FilterInput handleToggle={handleCalendarToggle} />
-            <FilterInput handleToggle={handleCalendarToggle} />
+            <FilterDate
+              handleToggle={handleCalendarToggle}
+              input={selectedDay}
+              open={calendar}
+            />
+            <FilterDate
+              handleToggle={handleCalendarToggleTwo}
+              input={selectedDayTwo}
+              open={calendarTwo}
+            />
           </div>
-          {calendar ? (
+          {calendar && (
             <div>
               <CalendarSelector
                 selectedDay={selectedDay}
                 setSelectedDay={setSelectedDay}
               />
             </div>
+          )}
+          {calendarTwo && (
+            <div>
+              <CalendarSelectorTwo
+                selectedDay={selectedDayTwo}
+                setSelectedDay={setSelectedDaytwo}
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="sidebar__transaction">
+          <h2>Transaction Type</h2>
+          <div className="sidebar__transaction-picker">
+            <FilterInput
+              handleToggle={handleTransactionToggle}
+              input={allcheckedTypes}
+              open={transactionType}
+            />
+          </div>
+          {transactionType ? (
+            <TransactionType handleChange={handleChange} />
           ) : null}
         </div>
 
         <div className="sidebar__transaction">
           <h2>Transaction Type</h2>
           <div className="sidebar__transaction-picker">
-            <FilterInput full handleToggle={handleTransactionToggle} />
+            <FilterInput
+              handleToggle={handleTransactionStatusToggle}
+              input={allcheckedStatus}
+              open={transactionStatus}
+            />
           </div>
-          {transactionType ? <TransactionType /> : null}
+          {transactionStatus ? (
+            <TransactionStatus handleChange={handleChangeStatus} />
+          ) : null}
         </div>
       </div>
     </SidebarWrapper>

@@ -27,7 +27,7 @@ export const TransactionTypes = [
     type: "Store Transactions",
   },
   {
-    type: "Get Tipped ",
+    type: "Get Tipped",
   },
   {
     type: "Withdrawals",
@@ -40,5 +40,26 @@ export const TransactionTypes = [
   },
   {
     type: "Refer & Earn",
+  },
+];
+
+export const TransactionStatusData = [
+  {
+    type: "Successful",
+  },
+  {
+    type: "Pending",
+  },
+  {
+    type: "Failed",
+  },
+];
+
+export const FilterButton = [
+  {
+    name: "Clear",
+  },
+  {
+    name: "Apply",
   },
 ];
